@@ -1,23 +1,30 @@
 // Modules to control application life and create native browser window
-const electron, { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, BrowserWindow } = require('electron')
 const { rootDir, viewsDir } = require('./app.config')
+require('electron-reload')(__dirname)
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 940,
     height: 600,
+    'min-width': 940,
+    'min-height': 494,
     webPreferences: {
-      preload: './preload.js'
-    }
+      preload: './preload.js',
+      nodeIntegration: true
+    },
+    backgroundColor: '#353535',
+    frame: false, // remove the title bar,
+    icon: '../cow-milk/public/favicon.ico' // icon for the app in the task bar
   })
 
   // and load the index.html of the app.
   mainWindow.loadFile(viewsDir + 'index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
 }
 
 // This method will be called when Electron has finished

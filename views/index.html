@@ -1,19 +1,124 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/form.css">
+  <link rel="stylesheet" href="../css/titleBar.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <title>Income Organiser</title>
+</head>
+
+<body>
+
+  <div id="title-bar">
+    <div id="title">IO</div>
+    <div id="title-bar-btns">
+      <button id="min-btn">-</button>
+      <button id="max-btn">+</button>
+      <button id="close-btn">x</button>
+    </div>
+  </div>
+
+  <div id="container">
+
+    <header>
+      <ul>
+        <li id="update-income">Update Income</li>
+        <li id="add-expendature">Add Expendature</li>
+        <h1 id="income-organiser-title">Income Organiser</h1>
+        <li id="remove-expendature">Remove Expendature</li>
+        <li id="reset">Reset</li>
+      </ul>
+    </header>
+
+    <p id="notification-message"></p>
+
+    <!-- <h1>Hello World!</h1>
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    and Electron <span id="electron-version"></span>.-->
 
-    <!-- You can also require other files to run in this process -->
-    <script src="../renderer.js"></script>
-  </body>
+    <div id="test"></div>
+
+    <form id="income-form">
+      <fieldset>
+        <legend>Income</legend>
+        <label>
+          Pension (%)
+          <input id="pension" type="number" placeholder="3">
+        </label>
+        <label>
+          Salary (before tax)
+          <input id="salary" type="number" placeholder="32000">
+        </label>
+        <label class="left">
+          Currency
+          <input id="currency" type="text" placeholder="$">
+        </label>
+        <button type="button" id="submit-income-form">Save</button>
+      </fieldset>
+    </form>
+
+    <form id="expendature-form" class="hide">
+      <fieldset>
+        <legend>Expendature</legend>
+        <label>
+          Payment Title
+          <input id="payment-title" type="text" placeholder="Petrol">
+        </label>
+        <label class="right">
+          Cost Per Month
+          <input id="cost" class="Currency-amount" type="number" placeholder="23.40" min="0.00" max="10000.00" step="any">
+        </label>
+        <label>
+          Date to Renew
+          <input id="date-to-renew" type="date" value="2020-01-20">
+        </label>
+        <button type="button" id="submit-expendature-form">Save</button>
+      </fieldset>
+    </form>
+
+    <div id="income-organiser">
+      <table>
+        <caption>Income Organiser</caption>
+        <tr class="table-row">
+          <th>
+            <th class="table-col">Monthly</th><th class="table-col">Yearly</th></th>
+        </tr>
+        <tr class="table-row">
+          <th>Tax<td>4</td><td>20</td></th>
+        </tr>
+        <tr class="tale-row">
+          <th>Pension<td>600</td></th><td>45000</td></th>
+        </tr>
+        <tr class="tale-row">
+          <th>NI<td>600</td></th><td>45000</td></th>
+        </tr>
+        <tr class="tale-row">
+          <th>Expendature<td>600</td></th><td>45000</td></th>
+        </tr>
+        <tr class="tale-row">
+          <th>Total Paid<td>600</td></th><td>45000</td></th>
+        </tr>
+        <tr class="tale-row">
+          <th>Actual Income<td>600</td></th><td>45000</td></th>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- You can also require other files to run in this process -->
+  <script src="../renderer.js"></script>
+  <script src="../js/titleBar.js"></script>
+  <script src="../js/index.js"></script>
+  <script src="../js/IncomeOrganiser.js"></script>
+  <script src="../js/header.js"></script>
+</body>
+
 </html>

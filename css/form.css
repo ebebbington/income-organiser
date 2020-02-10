@@ -1,0 +1,77 @@
+/**
+ * example html
+ * <form>
+ *  <fieldset>
+ *    <legend></legend>
+ *    <input>
+ *    <span><input><input></span>
+ *    <button type="button">
+ *  <fieldset>
+ * </form>
+ */
+::placeholder {
+    color: var(--sub-colour);
+    opacity: .7;
+}
+form {
+    margin: .5em auto .5em auto;
+    max-width: 700px;
+}
+form > fieldset {
+    text-align: center;
+    padding: 2vw;
+    border: 0;
+}
+form > fieldset > legend {
+    color: var(--main-colour);
+    padding: 0 2em 0 2em;
+    font-size: 1.2em;
+}
+form > fieldset label > input {
+    display: block;
+    margin: 0.2em auto 1em auto;
+    border: 0;
+    border-radius: 2px;
+    background: var(--ter-colour);
+    color: var(--sub-colour);
+    padding: 0.5em;
+    font-size: 1em;
+    text-align: center;
+}
+form > fieldset > span {
+    display: flex;
+}
+form > fieldset > span label.left {
+    margin: .5em 0 1em auto;
+}
+form > fieldset > span label.right {
+    margin: .5em auto 1em 0;
+}
+form > fieldset > span > label input {
+    margin: auto 0 auto 0 auto;
+}
+form > fieldset > span > label > input.currency-symbol {
+    width: 63px;
+    margin: 0.2em 0 1em auto;
+    border-right: 1px solid var(--sub-colour);
+}
+form > fieldset > span > label > input.currency-amount {
+    margin: 0.2em auto 1em 0;
+}
+form > fieldset > button[type="button"] {
+    background-color: var(--ter-colour);
+    color: var(--main-colour);
+    border: 0;
+    padding: .5em 1em;
+    border-radius: 5px;
+    transition-duration: .5s;
+    font-size: 1.2em;
+    
+}
+form > fieldset > button[type="button"]:hover {
+    color: var(--main-colour);
+    background-color: var(--ter-colour);
+    cursor: pointer;
+    box-shadow: 0 0 3px 3px var(--main-colour);
+    
+}

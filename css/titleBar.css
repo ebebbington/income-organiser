@@ -1,0 +1,35 @@
+#title-bar {
+    -webkit-app-region: drag;
+    height: 24px; 
+    background-color: var(--ter-colour);
+    padding: none;
+    margin: 0px; 
+}
+#title {
+    position: fixed;
+    top: 3px;
+    color: var(--main-colour);
+    left: 6px; 
+}  
+#title-bar-btns {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    top: -1px;
+    right: 0px;
+}
+#title-bar-btns button {
+    background: none;
+    border: none;
+    color: var(--main-colour);
+    font-size: 19.1px;
+}
+#title-bar-btns button:hover {
+    cursor: pointer;
+    color: var(--sub-colour);
+}
+#title-bar-btns button#close-btn:hover {
+    background-color: red;
+}
+#title-bar-btns button:focus {
+    outline: none;
+}

@@ -1,0 +1,31 @@
+:root {
+    --main-colour: navajowhite;
+    --sub-colour: #e0e0e0;
+    --ter-colour: #232323;
+}
+
+body {
+    padding: 0px;
+    margin: 0px; 
+    font-family: sans-serif;
+}
+
+#container {
+    color: var(--sub-colour);
+    padding: 0 5vw 0 5vw;
+}
+
+.hide {
+    display: none;
+}
+
+#notification-message {
+    position: absolute;
+    top: 18vh;
+    text-align: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    color: var(--sub-colour);
+    font-weight: bold;
+}

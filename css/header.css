@@ -1,0 +1,39 @@
+header {
+    margin-top: 2vh;
+    margin-bottom: 10vh;
+    width: 100%;
+}
+header > ul {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+}
+header > ul li {
+    margin: auto;
+    color: var(--main-colour);
+    cursor: pointer;
+}
+header > ul li:hover {
+    color: var(--sub-colour);
+}
+header > ul > h1 {
+    color: var(--sub-colour);
+}
+header > ul > h1:hover {
+    color: var(--main-colour);
+    cursor: pointer;
+}
+header > ul > h1, header > ul li {
+    width: 25%;
+    float: left;
+    padding: 7px;
+    font-size: 1em;
+    text-align: center;
+}
+.selected {
+    border-bottom: 2px dotted green;
+}
