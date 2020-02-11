@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "npm i",
-    "package": "node_modules/.bin/electron-packager . 'sample-electron-app' --platform-windows --out ./dist"
+    "package-mac": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=darwin --out ./releases",
+    "package-win": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=win32 --out ./releases",
+    "package-linux": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=linux --out ./releases"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
