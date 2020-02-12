@@ -20,16 +20,42 @@ body {
 }
 
 #notification-message {
+    left: -40px;
+    width: 100;
+    left: 5vw;
+    right: 5vw;
+    border-radius: 5px;
     position: absolute;
-    top: 18vh;
-    text-align: center;
-    margin: auto;
-    left: 0;
-    right: 0;
+    top: 13vh;
     color: var(--sub-colour);
     font-weight: bold;
 }
-
-#expendatures-table {
+#notification-message > p {
+    overflow: hidden;
     text-align: center;
+    transition-duration: 2s;
+    width: 0%;
+    word-break: break-word;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    background-color: var(--ter-colour);
+    margin: auto;
+    height: 20px;
+}
+#notification-message.show > p {
+    width: 100%;
+    padding:.5em;
+}
+
+#expenditures-table {
+    text-align: center;
+}
+
+h1, h2, h3, h4, caption {
+    color: var(--main-colour);
 }

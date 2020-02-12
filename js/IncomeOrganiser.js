@@ -16,9 +16,9 @@ class IncomeOrganiserModel {
     currency = ''
 
     /**
-     * @type {Array<{paymentTitle: string, dateToRenew: string, cost: int}>} expendetures List of expendetures
+     * @type {Array<{paymentTitle: string, dateToRenew: string, cost: int}>} expenditures List of expenditures
      */
-    expendetures = []
+    expenditures = []
 
     /**
      * @type {boolean} user If the user has data in the LS
@@ -35,7 +35,7 @@ class IncomeOrganiserModel {
     }
 
     HTMLiseData () {
-        const html = '<ul><li>Pension: ' + this.pension + '%</li><li>Salary: ' + this.currency + this.salary + '</li><li>Expendetures: ' + JSON.stringify(this.expendetures) + '</li></ul>'
+        const html = '<ul><li>Pension: ' + this.pension + '%</li><li>Salary: ' + this.currency + this.salary + '</li><li>expenditures: ' + JSON.stringify(this.expenditures) + '</li></ul>'
         return html
     }
 
@@ -51,7 +51,7 @@ class IncomeOrganiserModel {
             this.salary = data.salary
             this.user = true
             this.currency = data.currency
-            this.expendetures = data.expendetures
+            this.expenditures = data.expenditures
             this.pension = data.pension
         } else {
             this.user = false
@@ -59,9 +59,9 @@ class IncomeOrganiserModel {
     }
 
     deleteExpendature (paymentTitle) {
-        this.expendetures.forEach((expenditure, index) => {
+        this.expenditures.forEach((expenditure, index) => {
             if (expenditure.paymentTitle === paymentTitle) {
-                this.expendetures.splice(index, 1)
+                this.expenditures.splice(index, 1)
             }
         })
         this.save()
@@ -75,6 +75,6 @@ class IncomeOrganiserModel {
         this.currency = ''
         this.pension = 0
         this.salary = 0
-        this.expendetures = []
+        this.expenditures = []
     }
 }

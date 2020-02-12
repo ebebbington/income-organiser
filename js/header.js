@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
         Index.displayIncomeForm()
     }
 
-    document.getElementById('show-expendatures').onclick = function (event) {
+    document.getElementById('show-expenditures').onclick = function (event) {
         Index.displayExpendatures()
     }
 

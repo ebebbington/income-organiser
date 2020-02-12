@@ -8,8 +8,8 @@ const IncomeOrganiser = new IncomeOrganiserModel
 const Index = {
     displayIncomeForm: function () {
         document.getElementById('income-form').classList.remove('hide')
-        document.getElementById('add-expendeture-form').classList.add('hide')
-        document.getElementById('expendatures-table').classList.add('hide')
+        document.getElementById('add-expenditure-form').classList.add('hide')
+        document.getElementById('expenditures-table').classList.add('hide')
         document.getElementById('income-organiser').classList.add('hide')
         Utils.selectHeaderItem('show-income')
     },
@@ -24,20 +24,28 @@ const Index = {
         Index.populateExpendatures()
         if (IncomeOrganiser.user) {
             document.getElementById('income-form').classList.add('hide')
-            document.getElementById('add-expendeture-form').classList.add('hide')
-            document.getElementById('expendatures-table').classList.remove('hide')
+            document.getElementById('add-expenditure-form').classList.add('hide')
+            document.getElementById('expenditures-table').classList.remove('hide')
             document.getElementById('income-organiser').classList.add('hide')
-            Utils.selectHeaderItem('income-organiser-title')
+            Utils.selectHeaderItem('show-expenditures')
         } else {
-            alert("You haven\'t created one yet")
+            Index.notify('You haven\'t created one yet')
             Index.displayIncomeForm()
         }
     },
 
+    notify: function (message) {
+        document.querySelector('#notification-message > p').textContent = message
+        document.querySelector('#notification-message').classList.add('show')
+        setTimeout(() => {
+            document.querySelector('#notification-message').classList.remove('show')
+        }, 5000)
+    },
+
     displayAddExpendatureForm: function () {
         document.getElementById('income-form').classList.add('hide')
-        document.getElementById('add-expendeture-form').classList.remove('hide')
-        document.getElementById('expendatures-table').classList.add('hide')
+        document.getElementById('add-expenditure-form').classList.remove('hide')
+        document.getElementById('expenditures-table').classList.add('hide')
         document.getElementById('income-organiser').classList.add('hide')
     },
 
@@ -51,9 +59,9 @@ const Index = {
             IncomeOrganiser.salary = salary
             IncomeOrganiser.currency = currency
             IncomeOrganiser.save()
-            alert('Saved the form')
+            Index.notify('Saved the form')
         } else {
-            alert('Please fill out all the fields')
+            Index.notify('Please fill out all the fields')
         }
     },
 
@@ -67,12 +75,13 @@ const Index = {
                 dateToRenew: dateToRenew,
                 cost: parseInt(cost)
             }
-            IncomeOrganiser.expendetures.push(objData)
+            IncomeOrganiser.expenditures.push(objData)
             IncomeOrganiser.save()
             IncomeOrganiser.retrieve()
-            alert('Saved the expendature')
+            Index.fillIncomeOrganiserTable()
+            Index.notify('Saved the expenditure')
         } else {
-            alert('Please fill out all the fields')
+            Index.notify('Please fill out all the fields')
         }
     },
 
@@ -86,39 +95,37 @@ const Index = {
 
     populateExpendatures: function () {
         IncomeOrganiser.retrieve()
-        const expendaturesTable = document.querySelector('#expendatures-table table')
+        const expendaturesTable = document.querySelector('#expenditures-table table')
         // remove edisting ones from the dom
-        var rows = document.querySelectorAll('#expendatures-table table> tr')
+        var rows = document.querySelectorAll('#expenditures-table table> tr')
         rows.forEach(row => row.remove())
-        if (IncomeOrganiser.expendetures.length >= 1) {
-            IncomeOrganiser.expendetures.forEach(expendeture => {
+        IncomeOrganiser.expenditures.forEach(expenditure => {
                 let element = document.createElement('tr')
-                const dateCollection = expendeture.dateToRenew.split('-')
+                const dateCollection = expenditure.dateToRenew.split('-')
                 const day = dateCollection[2]
                 const month = dateCollection[1]
                 const year = dateCollection[0]
                 const formattedDate = day + '/' + month + '/' + year
                 element.innerHTML =
                     '<tr>' +
-                        `<td>${expendeture.paymentTitle}</td>` +
-                        `<td>${IncomeOrganiser.currency}${expendeture.cost}</td>` +
+                        `<td>${expenditure.paymentTitle}</td>` +
+                        `<td>${IncomeOrganiser.currency}${expenditure.cost}</td>` +
                         `<td>${formattedDate}</td>` +
-                        `<td><button class="remove delete-expendature" data-payment-title=${expendeture.paymentTitle}>X</button></td>` +
+                        `<td><button class="remove delete-expenditure" data-payment-title=${expenditure.paymentTitle}>X</button></td>` +
                     '</tr>'
                 expendaturesTable.appendChild(element)
             })
-        }
     },
 
     displayIncomeOrganiser: function () {
         if (IncomeOrganiser.user) {
             document.getElementById('income-form').classList.add('hide')
-            document.getElementById('add-expendeture-form').classList.add('hide')
-            document.getElementById('expendatures-table').classList.add('hide')
+            document.getElementById('add-expenditure-form').classList.add('hide')
+            document.getElementById('expenditures-table').classList.add('hide')
             document.getElementById('income-organiser').classList.remove('hide')
             Utils.selectHeaderItem('income-organiser-title')
         } else {
-            alert('Create one please!')
+            Index.notify('Create one please!')
         }
     },
 
@@ -138,11 +145,11 @@ const Index = {
         document.getElementById('ni-yearly').textContent = IncomeOrganiser.currency +  Math.ceil(NICostYearly)
 
         let monthlyExpendeture = 0
-        IncomeOrganiser.expendetures.forEach(expendeture => {
-            monthlyExpendeture += expendeture.cost
+        IncomeOrganiser.expenditures.forEach(expenditure => {
+            monthlyExpendeture += expenditure.cost
         })
-        document.getElementById('expendeture-monthly').textContent = IncomeOrganiser.currency +  Math.ceil(monthlyExpendeture)
-        document.getElementById('expendeture-yearly').textContent = IncomeOrganiser.currency + Math.ceil(monthlyExpendeture * 12)
+        document.getElementById('expenditure-monthly').textContent = IncomeOrganiser.currency +  Math.ceil(monthlyExpendeture)
+        document.getElementById('expenditure-yearly').textContent = IncomeOrganiser.currency + Math.ceil(monthlyExpendeture * 12)
 
         const totalPaidMonthly = monthlyExpendeture + (NICostYearly / 12) + (pensionCostYearly / 12) + (taxYearly / 12)
         document.getElementById('total-paid-monthly').textContent = IncomeOrganiser.currency +  Math.ceil(totalPaidMonthly)
@@ -161,7 +168,7 @@ const Index = {
             Index.populateExpendatures()
             Index.fillIncomeOrganiserTable()
             document.getElementById('income-form').classList.remove('hide')
-            document.getElementById('expendatures-table').classList.add('hide')
+            document.getElementById('expenditures-table').classList.add('hide')
             document.getElementById('income-organiser').classList.add('hide')
             Utils.selectHeaderItem('show-income')
         }
@@ -185,7 +192,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // Fill the income form
     Index.fillIncomeForm()
 
-    // Display the list of expendatures
+    // Display the list of expenditures
     Index.populateExpendatures()
 
     // Fill the income organiser table
@@ -206,21 +213,22 @@ window.addEventListener('DOMContentLoaded', () => {
         Index.fillIncomeOrganiserTable()
     }
 
-    document.getElementById('submit-expendature-form').onclick = function (event) {
+    document.getElementById('submit-expenditure-form').onclick = function (event) {
         Index.handleExpendatureSubmit()
     }
 
-    document.getElementById('add-new-expendature').onclick = function (event) {
+    document.getElementById('add-new-expenditure').onclick = function (event) {
         Index.displayAddExpendatureForm()
     }
 
     document.addEventListener('click', function (event) {
         if(event.target) {
             const elemClassList = event.target.classList
-            if (elemClassList.value.indexOf('delete-expendature') >= 0) {
+            if (elemClassList.value.indexOf('delete-expenditure') >= 0) {
                 const paymentTitle = event.target.dataset.paymentTitle
                 IncomeOrganiser.deleteExpendature(paymentTitle)
                 Index.populateExpendatures()
+                Index.fillIncomeOrganiserTable()
             }
        }
     })

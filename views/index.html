@@ -31,10 +31,14 @@
       <ul>
         <h1 id="income-organiser-title">Income Organiser</h1>
         <li id="show-income">Income</li>
-        <li id="show-expendatures">Expendatures</li>
+        <li id="show-expenditures">Expenditures</li>
         <li id="reset">Reset</li>
       </ul>
     </header>
+
+    <div id="notification-message">
+      <p>Hello</p>
+    </div>
 
     <!-- <h1>Hello World!</h1>
     We are using Node.js <span id="node-version"></span>,
@@ -60,8 +64,9 @@
       </fieldset>
     </form>
     
-    <div id="expendatures-table" class="hide">
-      <button id="add-new-expendature" type="button">Add</button>
+    <div id="expenditures-table" class="hide">
+      <h2>Expenditures</h2>
+      <button id="add-new-expenditure" type="button">Add</button>
       <table>
         <tr>
          
@@ -88,7 +93,7 @@
           <th>NI<td id="ni-monthly">600</td></th><td id="ni-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
-          <th>Expendature<td id="expendeture-monthly">600</td></th><td id="expendeture-yearly">45000</td></th>
+          <th>Expenditure<td id="expenditure-monthly">600</td></th><td id="expenditure-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
           <th>Total Paid<td id="total-paid-monthly">600</td></th><td id="total-paid-yearly">45000</td></th>
@@ -99,9 +104,9 @@
       </table>
     </div>
 
-    <form id="add-expendeture-form" class="hide">
+    <form id="add-expenditure-form" class="hide">
       <fieldset>
-        <legend>Add Expendeture</legend>
+        <legend>Add expenditure</legend>
         <label>
           Payment Title
           <input type="text" id="payment-title" placeholder="Petrol">
@@ -114,7 +119,7 @@
           Date to Renew
           <input type="date" id="date-to-renew">
         </label>
-        <button type="button" id="submit-expendature-form">Add</button>
+        <button type="button" id="submit-expenditure-form">Add</button>
       </fieldset>
     </form>
 
