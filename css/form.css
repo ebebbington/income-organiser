@@ -58,7 +58,7 @@ form > fieldset > span > label > input.currency-symbol {
 form > fieldset > span > label > input.currency-amount {
     margin: 0.2em auto 1em 0;
 }
-form > fieldset > button[type="button"] {
+button[type="button"] {
     background-color: var(--ter-colour);
     color: var(--main-colour);
     border: 0;
@@ -68,7 +68,7 @@ form > fieldset > button[type="button"] {
     font-size: 1.2em;
     
 }
-form > fieldset > button[type="button"]:hover {
+button[type="button"]:hover {
     color: var(--main-colour);
     background-color: var(--ter-colour);
     cursor: pointer;

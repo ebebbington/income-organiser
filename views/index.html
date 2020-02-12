@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../css/form.css">
   <link rel="stylesheet" href="../css/titleBar.css">
   <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/table.css">
   <title>Income Organiser</title>
 </head>
 
@@ -58,13 +59,14 @@
         <button type="button" id="submit-income-form">Save</button>
       </fieldset>
     </form>
+    
     <div id="expendatures-table" class="hide">
       <button id="add-new-expendature" type="button">Add</button>
       <table>
         <tr>
-          <th>
+         
             <th>Title</th><th>Cost</th><th>Date To Renew</th>
-          </th>
+          
         </tr>
       </table>
     </div>
@@ -96,6 +98,25 @@
         </tr>
       </table>
     </div>
+
+    <form id="add-expendeture-form" class="hide">
+      <fieldset>
+        <legend>Add Expendeture</legend>
+        <label>
+          Payment Title
+          <input type="text" id="payment-title" placeholder="Petrol">
+        </label>
+        <label>
+          Cost Per Month
+          <input type="number" id="cost" placeholder="124">
+        </label>
+        <label>
+          Date to Renew
+          <input type="date" id="date-to-renew">
+        </label>
+        <button type="button" id="submit-expendature-form">Add</button>
+      </fieldset>
+    </form>
 
   </div>
 

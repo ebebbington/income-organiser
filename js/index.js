@@ -8,6 +8,7 @@ const IncomeOrganiser = new IncomeOrganiserModel
 const Index = {
     displayIncomeForm: function () {
         document.getElementById('income-form').classList.remove('hide')
+        document.getElementById('add-expendeture-form').classList.add('hide')
         document.getElementById('expendatures-table').classList.add('hide')
         document.getElementById('income-organiser').classList.add('hide')
         Utils.selectHeaderItem('show-income')
@@ -20,17 +21,26 @@ const Index = {
     },
     displayExpendatures: function () {
         IncomeOrganiser.retrieve()
+        Index.populateExpendatures()
         if (IncomeOrganiser.user) {
             document.getElementById('income-form').classList.add('hide')
+            document.getElementById('add-expendeture-form').classList.add('hide')
             document.getElementById('expendatures-table').classList.remove('hide')
             document.getElementById('income-organiser').classList.add('hide')
             Utils.selectHeaderItem('income-organiser-title')
-            // todo :: display table correctly
         } else {
             alert("You haven\'t created one yet")
             Index.displayIncomeForm()
         }
     },
+
+    displayAddExpendatureForm: function () {
+        document.getElementById('income-form').classList.add('hide')
+        document.getElementById('add-expendeture-form').classList.remove('hide')
+        document.getElementById('expendatures-table').classList.add('hide')
+        document.getElementById('income-organiser').classList.add('hide')
+    },
+
     handleIncomeSubmit: function () {
         const pension = parseInt(document.getElementById('pension').value)
         const salary = parseInt(document.getElementById('salary').value)
@@ -46,23 +56,17 @@ const Index = {
             alert('Please fill out all the fields')
         }
     },
-    displayExpendatureForm: function () {
-        document.getElementById('income-form').classList.add('hide')
-        document.getElementById('expendature-form').classList.remove('hide')
-        document.getElementById('income-organiser').classList.add('hide')
-        Utils.selectHeaderItem('add-expendature')
-    },
+
     handleExpendatureSubmit: function () {
         const paymentTitle = document.getElementById('payment-title').value
         const cost = document.getElementById('cost').value
         const dateToRenew = document.getElementById('date-to-renew').value
-        if (paymentTitle && currency && cost && dateToRenew) {
+        if (paymentTitle && cost && dateToRenew) {
             const objData = {
                 paymentTitle: paymentTitle,
                 dateToRenew: dateToRenew,
                 cost: parseInt(cost)
             }
-            IncomeOrganiser.currency = currency
             IncomeOrganiser.expendetures.push(objData)
             IncomeOrganiser.save()
             IncomeOrganiser.retrieve()
@@ -73,31 +77,43 @@ const Index = {
     },
 
     fillIncomeForm: function () {
-        document.getElementById('pension').value = IncomeOrganiser.pension || ''
-        document.getElementById('salary').value = IncomeOrganiser.salary || ''
+        IncomeOrganiser.retrieve()
+        console.log(IncomeOrganiser)
+        document.getElementById('pension').value = IncomeOrganiser.pension || 0
+        document.getElementById('salary').value = IncomeOrganiser.salary || 0
         document.getElementById('currency').value = IncomeOrganiser.currency || ''
     },
 
     populateExpendatures: function () {
-        const expendaturesTable = document.getElementById('expendatures-table')
-        IncomeOrganiser.expendetures.forEach(expendeture => {
-            let element = document.createElement('tr')
-            const dateCollection = expendeture.dateToRenew.split('-')
-            const day = dateCollection[2]
-            const month = dateCollection[1]
-            const year = dateCollection[0]
-            const formattedDate = day + '/' + month + '/' + year
-            element.innerHTML =
-                '<tr>' +
-                    `<td>${expendeture.paymentTitle}</td><td>${expendeture.cost}</td><td>${formattedDate}</td>` +
-                '</tr>'
-            expendaturesTable.appendChild(element)
-        })
+        IncomeOrganiser.retrieve()
+        const expendaturesTable = document.querySelector('#expendatures-table table')
+        // remove edisting ones from the dom
+        var rows = document.querySelectorAll('#expendatures-table table> tr')
+        rows.forEach(row => row.remove())
+        if (IncomeOrganiser.expendetures.length >= 1) {
+            IncomeOrganiser.expendetures.forEach(expendeture => {
+                let element = document.createElement('tr')
+                const dateCollection = expendeture.dateToRenew.split('-')
+                const day = dateCollection[2]
+                const month = dateCollection[1]
+                const year = dateCollection[0]
+                const formattedDate = day + '/' + month + '/' + year
+                element.innerHTML =
+                    '<tr>' +
+                        `<td>${expendeture.paymentTitle}</td>` +
+                        `<td>${IncomeOrganiser.currency}${expendeture.cost}</td>` +
+                        `<td>${formattedDate}</td>` +
+                        `<td><button class="remove delete-expendature" data-payment-title=${expendeture.paymentTitle}>X</button></td>` +
+                    '</tr>'
+                expendaturesTable.appendChild(element)
+            })
+        }
     },
 
     displayIncomeOrganiser: function () {
         if (IncomeOrganiser.user) {
             document.getElementById('income-form').classList.add('hide')
+            document.getElementById('add-expendeture-form').classList.add('hide')
             document.getElementById('expendatures-table').classList.add('hide')
             document.getElementById('income-organiser').classList.remove('hide')
             Utils.selectHeaderItem('income-organiser-title')
@@ -130,11 +146,25 @@ const Index = {
 
         const totalPaidMonthly = monthlyExpendeture + (NICostYearly / 12) + (pensionCostYearly / 12) + (taxYearly / 12)
         document.getElementById('total-paid-monthly').textContent = IncomeOrganiser.currency +  Math.ceil(totalPaidMonthly)
-        document.getElementById('total-paid-yearly').textContent = IncomeOrganiser.currency + Math.ceil(totalPaidMonthly / 12)
+        document.getElementById('total-paid-yearly').textContent = IncomeOrganiser.currency + Math.ceil(totalPaidMonthly * 12)
 
-        const actualYearlyIncome = salary - (monthlyExpendeture * 12) - NICostYearly - pensionCostYearly - taxYearly
+        const actualYearlyIncome = IncomeOrganiser.salary - (totalPaidMonthly * 12)
         document.getElementById('actual-income-monthly').textContent = IncomeOrganiser.currency + Math.ceil(actualYearlyIncome / 12)
         document.getElementById('actual-income-yearly').textContent = IncomeOrganiser.currency + Math.ceil(actualYearlyIncome)
+    },
+
+    reset: function () {
+        const confirmation = confirm('Are you sure you want to do this? This will remove all your data')
+        if (confirmation) {
+            IncomeOrganiser.destroy()
+            Index.fillIncomeForm()
+            Index.populateExpendatures()
+            Index.fillIncomeOrganiserTable()
+            document.getElementById('income-form').classList.remove('hide')
+            document.getElementById('expendatures-table').classList.add('hide')
+            document.getElementById('income-organiser').classList.add('hide')
+            Utils.selectHeaderItem('show-income')
+        }
     }
     
 }
@@ -145,13 +175,13 @@ const Index = {
 
 window.addEventListener('DOMContentLoaded', () => {
 
-
     // Normalise dates of input fields
     Index.normaliseDateInputs()
 
     // Retrieve data if any
     IncomeOrganiser.retrieve()
 
+    console.log(IncomeOrganiser)
     // Fill the income form
     Index.fillIncomeForm()
 
@@ -176,13 +206,24 @@ window.addEventListener('DOMContentLoaded', () => {
         Index.fillIncomeOrganiserTable()
     }
 
-    // document.getElementById('submit-expendature-form').onclick = function (event) {
-    //     Index.handleExpendatureSubmit()
-    // }
+    document.getElementById('submit-expendature-form').onclick = function (event) {
+        Index.handleExpendatureSubmit()
+    }
 
     document.getElementById('add-new-expendature').onclick = function (event) {
-        // todo :: display form
+        Index.displayAddExpendatureForm()
     }
+
+    document.addEventListener('click', function (event) {
+        if(event.target) {
+            const elemClassList = event.target.classList
+            if (elemClassList.value.indexOf('delete-expendature') >= 0) {
+                const paymentTitle = event.target.dataset.paymentTitle
+                IncomeOrganiser.deleteExpendature(paymentTitle)
+                Index.populateExpendatures()
+            }
+       }
+    })
 })
 
 export default Index
