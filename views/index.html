@@ -28,22 +28,17 @@
 
     <header>
       <ul>
-        <li id="update-income">Update Income</li>
-        <li id="add-expendature">Add Expendature</li>
         <h1 id="income-organiser-title">Income Organiser</h1>
-        <li id="remove-expendature">Remove Expendature</li>
+        <li id="show-income">Income</li>
+        <li id="show-expendatures">Expendatures</li>
         <li id="reset">Reset</li>
       </ul>
     </header>
-
-    <p id="notification-message"></p>
 
     <!-- <h1>Hello World!</h1>
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.-->
-
-    <div id="test"></div>
 
     <form id="income-form">
       <fieldset>
@@ -63,25 +58,16 @@
         <button type="button" id="submit-income-form">Save</button>
       </fieldset>
     </form>
-
-    <form id="expendature-form" class="hide">
-      <fieldset>
-        <legend>Expendature</legend>
-        <label>
-          Payment Title
-          <input id="payment-title" type="text" placeholder="Petrol">
-        </label>
-        <label class="right">
-          Cost Per Month
-          <input id="cost" class="Currency-amount" type="number" placeholder="23.40" min="0.00" max="10000.00" step="any">
-        </label>
-        <label>
-          Date to Renew
-          <input id="date-to-renew" type="date" value="2020-01-20">
-        </label>
-        <button type="button" id="submit-expendature-form">Save</button>
-      </fieldset>
-    </form>
+    <div id="expendatures-table" class="hide">
+      <button id="add-new-expendature" type="button">Add</button>
+      <table>
+        <tr>
+          <th>
+            <th>Title</th><th>Cost</th><th>Date To Renew</th>
+          </th>
+        </tr>
+      </table>
+    </div>
 
     <div id="income-organiser">
       <table>
@@ -91,22 +77,22 @@
             <th class="table-col">Monthly</th><th class="table-col">Yearly</th></th>
         </tr>
         <tr class="table-row">
-          <th>Tax<td>4</td><td>20</td></th>
+          <th>Tax<td id="tax-monthly">4</td><td id="tax-yearly">20</td></th>
         </tr>
         <tr class="tale-row">
-          <th>Pension<td>600</td></th><td>45000</td></th>
+          <th>Pension<td id="pension-monthly">600</td></th><td id="pension-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
-          <th>NI<td>600</td></th><td>45000</td></th>
+          <th>NI<td id="ni-monthly">600</td></th><td id="ni-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
-          <th>Expendature<td>600</td></th><td>45000</td></th>
+          <th>Expendature<td id="expendeture-monthly">600</td></th><td id="expendeture-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
-          <th>Total Paid<td>600</td></th><td>45000</td></th>
+          <th>Total Paid<td id="total-paid-monthly">600</td></th><td id="total-paid-yearly">45000</td></th>
         </tr>
         <tr class="tale-row">
-          <th>Actual Income<td>600</td></th><td>45000</td></th>
+          <th>Actual Income<td id="actual-income-monthly">600</td></th><td id="actual-income-yearly">45000</td></th>
         </tr>
       </table>
     </div>

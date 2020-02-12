@@ -47,16 +47,24 @@ class IncomeOrganiserModel {
 
     retrieve () {
         const data = JSON.parse(localStorage.getItem('IncomeOrganiser'))
-        this.salary = data.salary
-        this.user = true
-        this.currency = data.currency
-        this.expendetures = data.expendetures
-        this.pension = data.pension
+        if (data && data.salary && data.currency && data.expendetures && data.pension) {
+            this.salary = data.salary
+            this.user = true
+            this.currency = data.currency
+            this.expendetures = data.expendetures
+            this.pension = data.pension
+        } else {
+            this.user = false
+        }
     }
 
     destroy () {
         localStorage.removeItem('user')
         localStorage.removeItem('IncomeOrganiser')
         this.user = false
+        this.currency = ''
+        this.pension = 0
+        this.salary = 0
+        this.expendetures = []
     }
 }

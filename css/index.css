@@ -29,3 +29,22 @@ body {
     color: var(--sub-colour);
     font-weight: bold;
 }
+
+table {
+    margin: auto;
+}
+table caption {
+    margin: 0.5em;
+    font-weight: bold;
+    color: var(--main-colour);
+}
+table th, table tr {
+    padding: .5em;
+}
+table tr {
+    border-bottom: red solid 1px;
+    text-align: center;
+}
+table td[id^="actual-income-"] {
+    background-color: green;
+}
