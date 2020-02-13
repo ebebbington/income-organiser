@@ -61,6 +61,12 @@ We use the `package.json` file to start the application locally, or package the 
 
 It boils down to using electron to start the app or electron-packager to package it
 
+**Build**
+
+Install dependencies before starting
+
+`npm run build`
+
 **Start**
 
 Run a local application without packaging
@@ -90,3 +96,7 @@ The packaged files will be placed in `/releases/<project-name>-<os>/`
 * Fix the issue of not being able to edit the input fields after clicking headers and so forth
 
 * Add accessisiblity, use one of the electron tools to test this
+
+* Backup the IO data into a json file so we aren't just relying on local storage
+
+ Create an icon for the app and place it in the scripts for package.json, e.g. `packahe-mac: ... --icon=/path/to/icon

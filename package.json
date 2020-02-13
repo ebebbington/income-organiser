@@ -1,27 +1,27 @@
 {
-  "name": "sample-electron-app",
+  "name": "income-organiser",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal Electron application to handle how much you really get paid",
   "main": "main.js",
+  "productName": "Income Organiser",
   "scripts": {
     "start": "electron .",
     "build": "npm i",
-    "package-mac": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=darwin --out ./releases",
-    "package-win": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=win32 --out ./releases",
-    "package-linux": "node_modules/.bin/electron-packager . 'Income Organiser' --overwrite --platform=linux --out ./releases"
+    "package-mac": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=darwin --out ./releases",
+    "package-win": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=win32 --out ./releases",
+    "package-linux": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=linux --out ./releases",
+    "dist-mac": "node_modules/.bin/electron-builder --mac",
+    "dist-win": "node_modules/.bin/electron-builder --win",
+    "dist-linux": "node_modules/.bin/electron-builder --linux"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/ebebbington/income-organiser.git",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Electron"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Edward Bebbington",
   "devDependencies": {
-    "electron": "^8.0.0"
+    "electron": "^8.0.0",
+    "electron-builder": "^22.3.2"
   },
   "dependencies": {
     "electron-packager": "^14.2.1",
