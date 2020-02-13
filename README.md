@@ -30,6 +30,10 @@ Electron is a a project that can be build using a few JavaScript files. It boils
 * `views/`
 
     * Contains our HTML files
+    
+* `debian.json`
+
+   * Our config file for when we create the installer for linux
 
 * `main.js`
 
