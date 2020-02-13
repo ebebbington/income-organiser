@@ -10,6 +10,14 @@ Electron is a a project that can be build using a few JavaScript files. It boils
 
     * Holds our CSS modules
 
+* `dist/`
+
+    * Holds our distrubutable installers
+
+* `installers/`
+
+    * Holds our script to create the installer for windows
+
 * `js/`
 
     * Holds our JS modules to handle events and functionality
@@ -63,8 +71,6 @@ It boils down to using electron to start the app or electron-packager to package
 
 **Build**
 
-Install dependencies before starting
-
 `npm run build`
 
 **Start**
@@ -78,6 +84,14 @@ Run a local application without packaging
 The packaged files will be placed in `/releases/<project-name>-<os>/`
 
 `npm run package-[win|mac|linux]`
+
+**Create Installers**
+
+Make sure to run `npm run package-*` first.
+
+This command will ceate an installer in `/dist/<os>/`
+
+`npm run dist-[win|mac|linux]`
 
 # Tests
 
@@ -99,4 +113,10 @@ The packaged files will be placed in `/releases/<project-name>-<os>/`
 
 * Backup the IO data into a json file so we aren't just relying on local storage
 
- Create an icon for the app and place it in the scripts for package.json, e.g. `packahe-mac: ... --icon=/path/to/icon
+* Create an icon for the app and place it in the scripts for package.json, e.g. `packahe-mac: ... --icon=/path/to/icon
+
+* add --icon=path option for dist-mac in package.json script
+
+* cant create installer for linux because package `electron-installer-debian` requires host os to  be linux, refer to this post: https://www.christianengvall.se/electron-installer-debian-package/
+
+* add icon for creating installer in debian.json: "icon": "assets/icons/png/1024x1024.png"

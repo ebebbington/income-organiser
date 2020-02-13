@@ -2,6 +2,12 @@
 const { app, BrowserWindow } = require('electron')
 const { rootDir, viewsDir } = require('./app.config')
 require('electron-reload')(__dirname)
+const setupEvents = require('./installers/windows/setupEvents')
+
+if (setupEvents.handleSquirrelEvent()) {
+  // squirrel event handled and app will exit in 1000ms, so don't do anything else
+  return;
+}
 
 function createWindow () {
   // Create the browser window.

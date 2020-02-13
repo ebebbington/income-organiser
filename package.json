@@ -10,9 +10,9 @@
     "package-mac": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=darwin --out ./releases",
     "package-win": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=win32 --out ./releases",
     "package-linux": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=linux --out ./releases",
-    "dist-mac": "node_modules/.bin/electron-builder --mac",
-    "dist-win": "node_modules/.bin/electron-builder --win",
-    "dist-linux": "node_modules/.bin/electron-builder --linux"
+    "dist-mac": "node_modules/.bin/electron-installer-dmg ./releases/'Income Organiser-darwin-x64'/'Income Organiser.app' 'Income Organiser' --out=dist/mac --overwrite",
+    "dist-win": "node installers/windows/createInstaller.js",
+    "dist-linux": "node_modules/.bin/electron-installer-debian --src releases/'Income Organiser-linux-x64'/ --arch amd64 --config debian.json"
   },
   "repository": "https://github.com/ebebbington/income-organiser.git",
   "keywords": [
@@ -21,10 +21,12 @@
   "author": "Edward Bebbington",
   "devDependencies": {
     "electron": "^8.0.0",
-    "electron-builder": "^22.3.2"
+    "electron-builder": "^22.3.2",
+    "electron-installer-dmg": "^3.0.0"
   },
   "dependencies": {
     "electron-packager": "^14.2.1",
-    "electron-reload": "^1.5.0"
+    "electron-reload": "^1.5.0",
+    "electron-winstaller": "^4.0.0"
   }
 }
