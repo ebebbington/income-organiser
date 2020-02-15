@@ -1,8 +1,8 @@
-# Sample Electron App
+# Income Organiser
 
 This project demonstrates building a GUI application using Electron, written using JavaScript and HTML.
 
-Electron is a a project that can be build using a few JavaScript files. It boils down to a `main.js` file using the Electron module to create a 'window', or rather an application. Where normal JavaScript and HTML can be used to display the UI and handle events.
+Electron is a project that can be build using a few JavaScript files. It boils down to a `main.js` file using the Electron module to create a 'window', or rather an application. Where normal JavaScript and HTML can be used to display the UI and handle events.
 
 # Directory Structure / Description
 
@@ -12,7 +12,7 @@ Electron is a a project that can be build using a few JavaScript files. It boils
 
 * `dist/`
 
-    * Holds our distrubutable installers
+    * Holds our distrubutable setup installers
 
 * `installers/`
 
@@ -113,7 +113,7 @@ This command will ceate an installer in `/dist/<os>/`
 
 * Fix the issue of not being able to edit the input fields after clicking headers and so forth
 
-* Add accessisiblity, use one of the electron tools to test this
+* Add accessisiblity, use one of the electron tools to test this and then update the tools used in the above to mention web accessibility
 
 * Backup the IO data into a json file so we aren't just relying on local storage
 
