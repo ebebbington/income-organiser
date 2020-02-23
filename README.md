@@ -106,21 +106,3 @@ This command will ceate an installer in `/dist/<os>/`
 # Information
 
 # Help
-
-# TODO
-
-* Better style the notification message
-
-* Fix the issue of not being able to edit the input fields after clicking headers and so forth
-
-* Add accessisiblity, use one of the electron tools to test this and then update the tools used in the above to mention web accessibility
-
-* Backup the IO data into a json file so we aren't just relying on local storage
-
-* Create an icon for the app and place it in the scripts for package.json, e.g. `packahe-mac: ... --icon=/path/to/icon
-
-* add --icon=path option for dist-mac in package.json script
-
-* cant create installer for linux because package `electron-installer-debian` requires host os to  be linux, refer to this post: https://www.christianengvall.se/electron-installer-debian-package/
-
-* add icon for creating installer in debian.json: "icon": "assets/icons/png/1024x1024.png"
