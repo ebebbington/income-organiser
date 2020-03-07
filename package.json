@@ -6,7 +6,7 @@
   "productName": "Income Organiser",
   "scripts": {
     "start": "electron .",
-    "build": "npm i",
+    "build": "npm i --verbose",
     "package-mac": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=darwin --out ./releases",
     "package-win": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=win32 --out ./releases",
     "package-linux": "node_modules/.bin/electron-packager . --overwrite --prune=true --platform=linux --out ./releases",
