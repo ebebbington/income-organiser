@@ -1,5 +1,8 @@
 # Income Organiser
 
+> :warning: **Archived because I have no intention anyomore to learn or use Electron**: This repository is only kept alive as a reference should I need to start using or learning Electron.
+
+
 This project demonstrates building a GUI application using Electron, written using JavaScript and HTML.
 
 Electron is a project that can be build using a few JavaScript files. It boils down to a `main.js` file using the Electron module to create a 'window', or rather an application. Where normal JavaScript and HTML can be used to display the UI and handle events.
